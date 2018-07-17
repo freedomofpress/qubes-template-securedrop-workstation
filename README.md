@@ -1,0 +1,1 @@
+# qubes-template-securedrop-workstation
