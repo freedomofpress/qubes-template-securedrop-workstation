@@ -43,8 +43,6 @@ aptInstall apt-transport-https
 [ -n "$workstation_repository_components" ] || workstation_repository_components="main"
 [ -n "$workstation_repository_apt_line" ] || workstation_repository_apt_line="deb $workstation_repository_uri $workstation_repository_suite $workstation_repository_components"
 [ -n "$workstation_repository_list" ] || workstation_repository_list="/etc/apt/sources.list.d/securedrop_workstation.list"
-[ -n "$workstation_kernel_version" ] || workstation_kernel_version="4.14.53-grsec"
-[ -n "$pax_flag" ] || pax_flag="/usr/lib/gnome-terminal/gnome-terminal-server   m"
 
 cat "$workstation_signing_key_file" | $chroot_cmd apt-key add -
 ## Sanity test. apt-key adv would exit non-zero if not exactly that fingerprint in apt's keyring.
@@ -54,15 +52,11 @@ echo "$workstation_repository_apt_line" > "${INSTALLDIR}/$workstation_repository
 
 aptUpdate
 
-aptInstall libelf-dev linux-image-$workstation_kernel_version linux-headers-$workstation_kernel_version paxctld
-
-$chroot_cmd dkms autoinstall -k $workstation_kernel_version
-$chroot_cmd update-grub
+aptInstall securedrop-workstation-grsec
 
 # Needed for qubes tooling (qubes-open-in-vm and qubes-copy-to-vm)
 # If more pax flags are needed in the future, we should manage them through a config file
-$chroot_cmd sh -c 'echo "$pax_flag" >> /etc/paxctld.conf'
-
+$chroot_cmd sh -c 'echo "/usr/lib/gnome-terminal/gnome-terminal-server   m" >> /etc/paxctld.conf'
 
 ## Workaround for Qubes bug:
 ## 'Debian Template: rely on existing tool for base image creation'
