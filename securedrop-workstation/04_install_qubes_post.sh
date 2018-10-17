@@ -52,7 +52,7 @@ echo "$workstation_repository_apt_line" > "${INSTALLDIR}/$workstation_repository
 
 aptUpdate
 
-aptInstall securedrop-workstation-grsec
+aptInstall securedrop-workstation-grsec securedrop-workstation-config
 
 # Needed for qubes tooling (qubes-open-in-vm and qubes-copy-to-vm)
 # If more pax flags are needed in the future, we should manage them through a config file
