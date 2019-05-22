@@ -38,7 +38,7 @@ Ensure your `~/.gitconfig` is configured to use `qubes-gpg-client-wrapper`:
 
 Finally, be sure to import the [Qubes Master Key](https://www.qubes-os.org/security/verifying-signatures/) to your GPG domain.
 You may need also to import [Qubes developer keys](https://www.qubes-os.org/security/pack/).
-You'll also need to import and trust Mickael's key if you haven't, and eventually other FPF developers as well.
+You'll also need to import and trust FPF's infrastructure authority key (F81962A54902300F72ECB83AA1FC1F6AD2D09049).
 
 ### Automatic build
 
