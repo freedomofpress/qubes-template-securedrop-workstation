@@ -35,7 +35,7 @@ mount --bind /dev "${INSTALLDIR}/dev"
 
 aptInstall apt-transport-https
 
-[ -n "$workstation_repository_suite" ] || workstation_repository_suite="stretch"
+[ -n "$workstation_repository_suite" ] || workstation_repository_suite="buster"
 [ -n "$workstation_signing_key_fingerprint" ] || workstation_signing_key_fingerprint="4ED79CC3362D7D12837046024A3BE4A92211B03C"
 [ -n "$workstation_signing_key_file" ] || workstation_signing_key_file="$BUILDER_DIR/$SRC_DIR/template-securedrop-workstation/keys/apt-test.asc"
 [ -n "$gpg_keyserver" ] || gpg_keyserver="keys.gnupg.net"
