@@ -1,7 +1,5 @@
 # qubes-template-securedrop-workstation
 
-Work in progress, not suitable for production use.
-
 This work was inspired by and reuses code from the Whonix Qubes template: https://github.com/adrelanos/qubes-template-whonix
 It is a derivative work under the GPL license, version 3 (see the files `COPYING` and `GPLv3` for details)
 
@@ -9,53 +7,33 @@ It is a derivative work under the GPL license, version 3 (see the files `COPYING
 ## Build instructions
 
 Note that these instructions must be carried out on a Fedora-based Qubes VM. Building templates uses a substantial amount of disk space.
-Your VM should have at least 20GB available for use.
-
-These scripts validate GPG signatures from upstream repos. So before getting started, we'll need to do a couple of things.
-
-First, make sure you've installed Qubes split-gpg tools in the VM you're using to build the templates:
-
-```
-sudo dnf install qubes-gpg-split
-```
-
-Configure your shell to use the right gpg VM (adjust if you're using a different gpg VM):
-
-```
-export QUBES_GPG_DOMAIN=gpg
-```
-
-You should add that line to your .bashrc or equivalent as well. 
-
-Ensure your `~/.gitconfig` is configured to use `qubes-gpg-client-wrapper`:
-
-```
-...
-[gpg]
-	program = qubes-gpg-client-wrapper
-...
-```
-
-Finally, be sure to import the [Qubes Master Key](https://www.qubes-os.org/security/verifying-signatures/) to your GPG domain.
-You may need also to import [Qubes developer keys](https://www.qubes-os.org/security/pack/).
-You'll also need to import and trust FPF's infrastructure authority key (F81962A54902300F72ECB83AA1FC1F6AD2D09049).
+Your VM should have at least 20GB available for use in the private volume.
 
 ### Automatic build
 
 0. Checkout the [securedrop workstation repo](https://github.com/freedomofpress/securedrop-workstation)
 1. Run `make template``
 
+### Testing changes to builder logic
+
+0. Checkout the [securedrop workstation repo](https://github.com/freedomofpress/securedrop-workstation)
+1. Repace the following value in `securedrop-workstation.conf`: ` BRANCH_template_securedrop_workstation ?= $TEST_BRANCH` 
+2. Replace the checkout default branch (master) by $TEST_BRANCH_NAME in `builder/build-workstation-template` script in securedrop-workstation repo (`git clone -b $TEST_BRANCH <git url>`).
+3. Sign the tag using a trusted key (or edit the `builder/build-workstation-template` script to import/trust the key)
+4. Run `make template`
+
 ### Manual build
 
+0. Import and trust the [Qubes Master Key](https://www.qubes-os.org/security/verifying-signatures/) and the FPF authority key into your gpg keyring or GPG domain's keyring.
 1. Clone the [qubes-builder repository](https://github.com/qubesos/qubes-builder)
 2. Change directories into the `qubes-builder` repo
-2. Copy the `securedrop-workstation.conf` from this repo as `builder.conf` inside the `qubes-builder` repo
-3. `make about` should return `securedrop-workstation.conf`
-4. Run `make install-deps`
-5. Run `make get-sources`
-6. Run `make qubes-vm`
-7. Run `make template`
-8. The built template RPM will be in `qubes-builder/qubes-src/linux-template-builder/rpm/noarch`
+3. Copy the `securedrop-workstation.conf` from this repo as `builder.conf` inside the `qubes-builder` repo
+4. `make about` should return `securedrop-workstation.conf`
+5. Run `make install-deps`
+6. Run `make get-sources`
+7. Run `make qubes-vm`
+8. Run `make template`
+9. The built template RPM will be in `qubes-builder/qubes-src/linux-template-builder/rpm/noarch`
 
 ## Installation instructions
 
