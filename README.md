@@ -11,16 +11,13 @@ Your VM should have at least 20GB available for use in the private volume.
 
 ### Automatic build
 
-0. Checkout the [securedrop workstation repo](https://github.com/freedomofpress/securedrop-workstation)
-1. Run `make template``
+1. `make template`
 
 ### Testing changes to builder logic
 
-0. Checkout the [securedrop workstation repo](https://github.com/freedomofpress/securedrop-workstation)
 1. Repace the following value in `securedrop-workstation.conf`: ` BRANCH_template_securedrop_workstation ?= $TEST_BRANCH` 
-2. Replace the checkout default branch (master) by $TEST_BRANCH_NAME in `builder/build-workstation-template` script in securedrop-workstation repo (`git clone -b $TEST_BRANCH <git url>`).
-3. Sign the tag using a trusted key (or edit the `builder/build-workstation-template` script to import/trust the key)
-4. Run `make template`
+2. Sign the tag using a trusted key (or edit the `builder/build-workstation-template` script to import/trust the key)
+3. `make template`
 
 ### Manual build
 
