@@ -36,10 +36,10 @@ mount --bind /dev "${INSTALLDIR}/dev"
 aptInstall apt-transport-https
 
 [ -n "$workstation_repository_suite" ] || workstation_repository_suite="buster"
-[ -n "$workstation_signing_key_fingerprint" ] || workstation_signing_key_fingerprint="4ED79CC3362D7D12837046024A3BE4A92211B03C"
-[ -n "$workstation_signing_key_file" ] || workstation_signing_key_file="$BUILDER_DIR/$SRC_DIR/template-securedrop-workstation/keys/apt-test.asc"
+[ -n "$workstation_signing_key_fingerprint" ] || workstation_signing_key_fingerprint="22245C81E3BAEB4138B36061310F561200F4AD77"
+[ -n "$workstation_signing_key_file" ] || workstation_signing_key_file="$BUILDER_DIR/$SRC_DIR/template-securedrop-workstation/keys/release-key.asc"
 [ -n "$gpg_keyserver" ] || gpg_keyserver="keys.gnupg.net"
-[ -n "$workstation_repository_uri" ] || workstation_repository_uri="https://apt-test-qubes.freedom.press"
+[ -n "$workstation_repository_uri" ] || workstation_repository_uri="https://apt.freedom.press"
 [ -n "$workstation_repository_components" ] || workstation_repository_components="main"
 [ -n "$workstation_repository_apt_line" ] || workstation_repository_apt_line="deb $workstation_repository_uri $workstation_repository_suite $workstation_repository_components"
 [ -n "$workstation_repository_list" ] || workstation_repository_list="/etc/apt/sources.list.d/securedrop_workstation.list"
