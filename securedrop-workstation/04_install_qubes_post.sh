@@ -33,7 +33,7 @@ fi
 
 mount --bind /dev "${INSTALLDIR}/dev"
 
-aptInstall apt-transport-https
+aptInstall apt-transport-https qubes-vm-recommended
 
 [ -n "$workstation_repository_suite" ] || workstation_repository_suite="buster"
 [ -n "$workstation_signing_key_fingerprint" ] || workstation_signing_key_fingerprint="22245C81E3BAEB4138B36061310F561200F4AD77"
