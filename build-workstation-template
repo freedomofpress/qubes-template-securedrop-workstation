@@ -36,8 +36,9 @@ make COMPONENTS="builder" get-sources
 # Add signing key to the keyring. The pubkey fingerprint tracked here is the "FPF Authority Key".
 # In order to test PRs, you may want to use a personal key with a temporary signed tag.
 # See comments above regarding feature branches in the git clone operation.
-gpg --homedir ${gpg_homedir} --keyserver pool.sks-keyservers.net --recv-key 22245C81E3BAEB4138B36061310F561200F4AD77 || exit 1;
-echo '22245C81E3BAEB4138B36061310F561200F4AD77:6:' | gpg --homedir ${gpg_homedir} --import-ownertrust;
+release_key_fingerprint="22245C81E3BAEB4138B36061310F561200F4AD77"
+gpg --homedir ${gpg_homedir} --keyserver keys.openpgp.org --recv-key "$release_key_fingerprint"
+echo "${release_key_fingerprint}:6:" | gpg --homedir ${gpg_homedir} --import-ownertrust
 
 # Get all sources
 make get-sources
