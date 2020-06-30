@@ -33,7 +33,7 @@ fi
 
 mount --bind /dev "${INSTALLDIR}/dev"
 
-aptInstall apt-transport-https
+aptInstall apt-transport-https qubes-vm-recommended
 
 [ -n "$workstation_repository_suite" ] || workstation_repository_suite="buster"
 [ -n "$workstation_signing_key_fingerprint" ] || workstation_signing_key_fingerprint="22245C81E3BAEB4138B36061310F561200F4AD77"
@@ -52,7 +52,7 @@ echo "$workstation_repository_apt_line" > "${INSTALLDIR}/$workstation_repository
 
 aptUpdate
 
-aptInstall securedrop-workstation-grsec securedrop-workstation-config
+aptInstall securedrop-workstation-grsec securedrop-workstation-config securedrop-keyring
 
 # Needed for qubes tooling (qubes-open-in-vm and qubes-copy-to-vm)
 # If more pax flags are needed in the future, we should manage them through a config file

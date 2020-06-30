@@ -9,7 +9,7 @@ It is a derivative work under the GPL license, version 3 (see the files `COPYING
 Note that these instructions must be carried out on a Fedora-based Qubes VM. Building templates uses a substantial amount of disk space.
 
 ### Set up build VM:
-1. Create a fedora-30 based AppVM for building the templates
+1. Create a fedora-31 based AppVM for building the templates
 2. Increase the disk size to at least 20GB (as the build uses over 10GB): qvm-volume extend sd-template-builder:private 15GB (if your VM is not named sd-template-builder, adjust that command)
 3. Import the QubesOS master key and the GPG key used to sign tags (see https://www.qubes-os.org/security/verifying-signatures/)
 
