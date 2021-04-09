@@ -1,3 +1,5 @@
+> By contributing to this project, you agree to abide by our [Code of Conduct](https://github.com/freedomofpress/.github/blob/main/CODE_OF_CONDUCT.md).
+
 # qubes-template-securedrop-workstation
 
 This work was inspired by and reuses code from the Whonix Qubes template: https://github.com/adrelanos/qubes-template-whonix
@@ -20,7 +22,7 @@ Note that these instructions must be carried out on a Fedora-based Qubes VM. Bui
 
 ### Testing changes to builder logic
 
-1. Repace the following value in `securedrop-workstation.conf`: ` BRANCH_template_securedrop_workstation ?= $TEST_BRANCH` 
+1. Repace the following value in `securedrop-workstation.conf`: ` BRANCH_template_securedrop_workstation ?= $TEST_BRANCH`
 2. Sign the tag using a trusted key (or edit the `builder/build-workstation-template` script to import/trust the key)
 3. `make template`
 
