@@ -10,6 +10,7 @@ repo_root="$(git rev-parse --show-toplevel)"
 build_dir="${repo_root}"
 qubes_builder_dir="${build_dir}/qubes-builder"
 gpg_homedir="${repo_root}/qubes-builder/keyrings/git"
+gpg_homedir_sdw="${gpg_homedir}/template-securedrop-workstation"
 
 # Chroot may exist due to previous failed build; let's clean up responsibly.
 if [[ -d "${qubes_builder_dir}" ]]
@@ -17,6 +18,10 @@ then
     # Command exits 0 even if no chroot exists.
     make -C "${qubes_builder_dir}" clean-chroot
 fi
+
+# Dump platform info, useful for build logs
+echo "Platform info:"
+hostnamectl
 
 # Heavy-handed, but ensures build is clean, and also sidesteps idempotence
 # issues with the git clone/checkout commands.
@@ -28,17 +33,24 @@ git clone https://github.com/qubesos/qubes-builder "${build_dir}/qubes-builder"
 cd "${qubes_builder_dir}"
 
 # Provision securedrop-workstation config so that we get the correct sources via `make get-sources`.
-cp ${repo_root}/securedrop-workstation.conf builder.conf
+cp "${repo_root}/securedrop-workstation.conf" builder.conf
 
 # Get sources for only the builder component, which will get Qubes dev keys and initialize the keyring
 make COMPONENTS="builder" get-sources
+mkdir -m 700 "${gpg_homedir_sdw}"
 
-# Add signing key to the keyring. The pubkey fingerprint tracked here is the "FPF Authority Key".
+# Add signing key to the keyring. The pubkey fingerprint tracked here is the SecureDrop
+# Release Signing Key. Temporarily, we'll authorize use of two signing keys, for rotation.
 # In order to test PRs, you may want to use a personal key with a temporary signed tag.
-# See comments above regarding feature branches in the git clone operation.
-release_key_fingerprint="22245C81E3BAEB4138B36061310F561200F4AD77"
-gpg --homedir ${gpg_homedir} --keyserver keys.openpgp.org --recv-key "$release_key_fingerprint"
-echo "${release_key_fingerprint}:6:" | gpg --homedir ${gpg_homedir} --import-ownertrust
+# See README regarding feature branches for testing changes.
+release_key_fingerprint_2020="22245C81E3BAEB4138B36061310F561200F4AD77"
+release_key_fingerprint_2021="2359E6538C0613E652955E6C188EDD3B7B22E6A3"
+for k in "$release_key_fingerprint_2020" "$release_key_fingerprint_2021"; do
+    for d in "$gpg_homedir" "$gpg_homedir_sdw"; do
+        gpg --homedir "$d" --keyserver keys.openpgp.org --recv-key "$k"
+        echo "${k}:6:" | gpg --homedir "$d" --import-ownertrust
+    done
+done
 
 # Get all sources
 make get-sources
