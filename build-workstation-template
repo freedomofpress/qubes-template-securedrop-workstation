@@ -19,6 +19,10 @@ then
     make -C "${qubes_builder_dir}" clean-chroot
 fi
 
+# Dump platform info, useful for build logs
+echo "Platform info:"
+hostnamectl
+
 # Heavy-handed, but ensures build is clean, and also sidesteps idempotence
 # issues with the git clone/checkout commands.
 rm -rf "${qubes_builder_dir}"

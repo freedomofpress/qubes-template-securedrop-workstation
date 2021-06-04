@@ -11,10 +11,12 @@ Building templates uses a substantial amount of disk space.
 
 ### Set up build VM:
 Set up a long-lived VM that you can use for building SDW templates.
-You'll only need to perform this step once, although make sure to check
-whether your Fedora version remains current.
+This should be a separate VM from the (Debian-based) `sd-dev` recommended
+in the [SDW setup docs](https://github.com/freedomofpress/securedrop-workstation/#development-environment).
+You'll only need to perform this step once, although you should confirm
+whether your Fedora version remains current each time.
 
-1. Create an AppVM based on the most recent fedora release: `qvm-create --label purple --template fedora-33 sd-template-builder`
+1. Create an AppVM based on the most recent fedora release: `qvm-create --label purple --template fedora-XX sd-template-builder`
 2. Increase the disk size to at least 20GB (as the build uses over 10GB): `qvm-volume resize sd-template-builder:private 20G`
 3. Clone this repository into the AppVM: `git clone https://github.com/freedomofpress/qubes-template-securedrop-workstation`
 
@@ -23,12 +25,15 @@ We maintain a wrapper script that handles the interoperation with the upstream [
 Typically, you'll need only this short-and-sweet workflow to build a new template RPM.
 If you encounter problems, see the manual build instructions below.
 
-1. `make template`
-2. The Template RPM can be found in `./qubes-builder/qubes-src/linux-template-builder/rpm/`
+1. Run `sudo dnf upgrade -y` to ensure your machine is up to date.
+2. `make template`
+3. The Template RPM can be found in `./qubes-builder/qubes-src/linux-template-builder/rpm/`
 
 ### Testing changes to builder logic
 
 The qubes-builder logic expects signed tags on the most recent HEAD commit of the target branch.
+The tag and commit must be present on the _remote_, i.e. this repository. Simply creating them
+locally isn't enough, you'll need to push them up to the remote.
 If you're making changes to the build logic in this repo, you won't have a prod-signed tag yet,
 since you're still testing! Create a test-only tag signed with your individual GPG key.
 
