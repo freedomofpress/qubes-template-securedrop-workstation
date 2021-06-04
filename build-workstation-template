@@ -13,7 +13,7 @@ gpg_homedir="${repo_root}/qubes-builder/keyrings/git"
 gpg_homedir_sdw="${gpg_homedir}/template-securedrop-workstation"
 
 # Chroot may exist due to previous failed build; let's clean up responsibly.
-if [[ -d "${qubes_builder_dir}" ]]
+if [[ -e "${qubes_builder_dir}/Makefile" ]]
 then
     # Command exits 0 even if no chroot exists.
     make -C "${qubes_builder_dir}" clean-chroot
@@ -25,7 +25,7 @@ hostnamectl
 
 # Heavy-handed, but ensures build is clean, and also sidesteps idempotence
 # issues with the git clone/checkout commands.
-rm -rf "${qubes_builder_dir}"
+sudo rm -rf "${qubes_builder_dir}"
 
 # Make sure to add the corresponding pubkey for the signed tag to the gpg import tasks below.
 git clone https://github.com/qubesos/qubes-builder "${build_dir}/qubes-builder"
