@@ -1,0 +1,28 @@
+From eccc43b0ffd137a244f026c5e8ad10b536219cb1 Mon Sep 17 00:00:00 2001
+From: Conor Schaefer <conor@freedom.press>
+Date: Thu, 24 Mar 2022 14:42:23 -0700
+Subject: [PATCH] TEMPORARY: disable all verification
+
+The most recent tag for the SDW template is signed with the old key.
+Perhaps we should have dual-signed it. We'll need to update that,
+but for local development, let's bypass it and see if we can get a
+working build.
+---
+ scripts/get-sources | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/scripts/get-sources b/scripts/get-sources
+index deeb694..f5cb0cc 100755
+--- a/scripts/get-sources
++++ b/scripts/get-sources
+@@ -113,6 +113,7 @@ if elementIn "$COMPONENT" $INSECURE_SKIP_CHECKING; then
+ elif elementIn "$COMPONENT" $LESS_SECURE_SIGNED_COMMITS_SUFFICIENT; then
+     CHECK=signed-tag-or-commit
+ fi
++verify=false
+ 
+ VERIFY_REF=$(git -C "$REPO" rev-parse -q --verify "$VERIFY_REF") || exit
+ 
+-- 
+2.34.1
+
