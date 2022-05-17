@@ -25,6 +25,7 @@ hostnamectl
 
 # Heavy-handed, but ensures build is clean, and also sidesteps idempotence
 # issues with the git clone/checkout commands.
+sudo umount qubes-builder/chroot-vm-*/proc || true
 sudo rm -rf "${qubes_builder_dir}"
 
 # Make sure to add the corresponding pubkey for the signed tag to the gpg import tasks below.

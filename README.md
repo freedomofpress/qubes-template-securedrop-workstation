@@ -17,7 +17,7 @@ You'll only need to perform this step once, although you should confirm
 whether your Fedora version remains current each time.
 
 1. Create an AppVM based on the most recent fedora release: `qvm-create --label purple --template fedora-XX sd-template-builder`
-2. Increase the disk size to at least 20GB (as the build uses over 10GB): `qvm-volume resize sd-template-builder:private 20G`
+2. Increase the disk size to at least 30GB (as the build uses over 20GB): `qvm-volume resize sd-template-builder:private 20G`
 3. Clone this repository into the AppVM: `git clone https://github.com/freedomofpress/qubes-template-securedrop-workstation`
 
 ### Automatic build
