@@ -37,12 +37,12 @@ mount --bind /dev "${INSTALLDIR}/dev"
 
 aptInstall apt-transport-https qubes-vm-recommended
 
-[ -n "$workstation_repository_suite" ] || workstation_repository_suite="buster"
+[ -n "$workstation_repository_suite" ] || workstation_repository_suite="bullseye"
 [ -n "$workstation_signing_key_fingerprint_2020" ] || workstation_signing_key_fingerprint_2020="22245C81E3BAEB4138B36061310F561200F4AD77"
 [ -n "$workstation_signing_key_file_2020" ] || workstation_signing_key_file_2020="$BUILDER_DIR/$SRC_DIR/template-securedrop-workstation/keys/release-key-LEGACY.asc"
 [ -n "$workstation_signing_key_fingerprint_2021" ] || workstation_signing_key_fingerprint_2021="2359E6538C0613E652955E6C188EDD3B7B22E6A3"
 [ -n "$workstation_signing_key_file_2021" ] || workstation_signing_key_file_2021="$BUILDER_DIR/$SRC_DIR/template-securedrop-workstation/keys/release-key.asc"
-[ -n "$workstation_repository_uri" ] || workstation_repository_uri="https://apt.freedom.press"
+[ -n "$workstation_repository_uri" ] || workstation_repository_uri="https://apt-test.freedom.press"
 [ -n "$workstation_repository_components" ] || workstation_repository_components="main"
 [ -n "$workstation_repository_apt_line" ] || workstation_repository_apt_line="deb $workstation_repository_uri $workstation_repository_suite $workstation_repository_components"
 [ -n "$workstation_repository_list" ] || workstation_repository_list="/etc/apt/sources.list.d/securedrop_workstation.list"
