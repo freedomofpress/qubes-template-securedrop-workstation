@@ -38,9 +38,9 @@ mount --bind /dev "${INSTALLDIR}/dev"
 aptInstall apt-transport-https qubes-vm-recommended
 
 [ -n "$workstation_repository_suite" ] || workstation_repository_suite="bullseye"
-[ -n "$workstation_signing_key_fingerprint_2021" ] || workstation_signing_key_fingerprint_2021="2359E6538C0613E652955E6C188EDD3B7B22E6A3"
-[ -n "$workstation_signing_key_file_2021" ] || workstation_signing_key_file_2021="$BUILDER_DIR/$SRC_DIR/template-securedrop-workstation/keys/release-key.asc"
-[ -n "$workstation_repository_uri" ] || workstation_repository_uri="https://apt.freedom.press"
+[ -n "$workstation_test_key_fingerprint" ] || workstation_test_key_fingerprint="4ED79CC3362D7D12837046024A3BE4A92211B03C"
+[ -n "$workstation_test_key_file" ] || workstation_test_key_file="$BUILDER_DIR/$SRC_DIR/template-securedrop-workstation/keys/test-key.asc"
+[ -n "$workstation_repository_uri" ] || workstation_repository_uri="https://apt-test.freedom.press"
 [ -n "$workstation_repository_components" ] || workstation_repository_components="main"
 [ -n "$workstation_repository_apt_line" ] || workstation_repository_apt_line="deb $workstation_repository_uri $workstation_repository_suite $workstation_repository_components"
 [ -n "$workstation_repository_list" ] || workstation_repository_list="/etc/apt/sources.list.d/securedrop_workstation.list"
@@ -48,9 +48,9 @@ aptInstall apt-transport-https qubes-vm-recommended
 # These keys are necessary only for bootstrapping the FPF apt repo config.
 # Below, the 'securedrop-keyring' package is installed, which will manage
 # key rotation for the life of the template.
-$chroot_cmd apt-key add - < "$workstation_signing_key_file_2021"
+$chroot_cmd apt-key add - < "$workstation_test_key_file"
 ## Sanity test. apt-key adv would exit non-zero if not exactly that fingerprint in apt's keyring.
-$chroot_cmd apt-key adv --fingerprint "$workstation_signing_key_fingerprint_2021"
+$chroot_cmd apt-key adv --fingerprint "$workstation_test_key_fingerprint"
 
 echo "${INSTALLDIR}/$workstation_repository_list"
 echo "$workstation_repository_apt_line" > "${INSTALLDIR}/$workstation_repository_list"
