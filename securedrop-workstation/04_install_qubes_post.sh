@@ -37,7 +37,7 @@ mount --bind /dev "${INSTALLDIR}/dev"
 
 aptInstall apt-transport-https qubes-vm-recommended
 
-[ -n "$workstation_repository_suite" ] || workstation_repository_suite="buster"
+[ -n "$workstation_repository_suite" ] || workstation_repository_suite="bullseye"
 [ -n "$workstation_signing_key_fingerprint_2020" ] || workstation_signing_key_fingerprint_2020="22245C81E3BAEB4138B36061310F561200F4AD77"
 [ -n "$workstation_signing_key_file_2020" ] || workstation_signing_key_file_2020="$BUILDER_DIR/$SRC_DIR/template-securedrop-workstation/keys/release-key-LEGACY.asc"
 [ -n "$workstation_signing_key_fingerprint_2021" ] || workstation_signing_key_fingerprint_2021="2359E6538C0613E652955E6C188EDD3B7B22E6A3"
