@@ -59,10 +59,6 @@ aptUpdate
 
 aptInstall securedrop-workstation-grsec securedrop-workstation-config securedrop-keyring
 
-# Needed for qubes tooling (qubes-open-in-vm and qubes-copy-to-vm)
-# If more pax flags are needed in the future, we should manage them through a config file
-$chroot_cmd sh -c 'echo "/usr/lib/gnome-terminal/gnome-terminal-server   m" >> /etc/paxctld.conf'
-
 ## Workaround for Qubes bug:
 ## 'Debian Template: rely on existing tool for base image creation'
 ## https://github.com/QubesOS/qubes-issues/issues/1055
