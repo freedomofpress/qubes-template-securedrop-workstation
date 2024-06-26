@@ -1,8 +1,12 @@
 > By contributing to this project, you agree to abide by our [Code of Conduct](https://github.com/freedomofpress/.github/blob/main/CODE_OF_CONDUCT.md).
 
-# qubes-template-securedrop-workstation
+# qubes-template-securedrop-workstation (obsolete)
 
-Repository for managing the TemplateVM RPM used by the [SecureDrop Workstation] in provisioning custom VMs.
+This repository was for managing the TemplateVM RPM used by the
+[SecureDrop Workstation] in provisioning custom VMs up until the 1.0.0
+release in mid-2024.
+
+It is no longer used nor maintained.
 
 ## Build instructions
 
