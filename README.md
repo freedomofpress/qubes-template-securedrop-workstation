@@ -4,7 +4,7 @@
 
 This repository was for managing the TemplateVM RPM used by the
 [SecureDrop Workstation] in provisioning custom VMs up until the 1.0.0
-release in mid-2024.
+release in mid-2024, as described in <https://github.com/freedomofpress/securedrop-workstation/issues/969>.
 
 It is no longer used nor maintained.
 
